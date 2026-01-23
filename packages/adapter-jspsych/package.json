@@ -56,9 +56,9 @@
     "@jspsych/plugin-survey-text": "^2.0.0",
     "@jspsych/plugin-survey-html-form": "^2.1.0",
     "@jspsych/plugin-html-keyboard-response": "^2.0.0",
-    "jsdom": "^25.0.1",
+    "jsdom": "^27.4.0",
     "tsup": "^8.3.5",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "vitest": "^4.0.18"
   }
 }
