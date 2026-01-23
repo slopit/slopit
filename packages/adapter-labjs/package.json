@@ -1,0 +1,67 @@
+{
+  "name": "@slopit/adapter-labjs",
+  "version": "0.1.0",
+  "description": "lab.js integration adapter for slopit behavioral capture",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Aaron Steven White",
+    "email": "aaron.white@rochester.edu",
+    "url": "https://aaronstevenwhite.io"
+  },
+  "homepage": "https://slopit.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slopit/slopit.git",
+    "directory": "packages/adapter-labjs"
+  },
+  "bugs": {
+    "url": "https://github.com/slopit/slopit/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "labjs",
+    "lab.js",
+    "behavioral-research",
+    "experiment",
+    "psychology",
+    "ai-detection",
+    "crowdsourcing"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "lab.js": ">=21.0.0"
+  },
+  "peerDependenciesMeta": {
+    "lab.js": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@slopit/adapter-shared": "workspace:*",
+    "@slopit/behavioral": "workspace:*",
+    "@slopit/core": "workspace:*"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1",
+    "lab.js": "^20.2.4",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

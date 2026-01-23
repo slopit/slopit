@@ -1,0 +1,62 @@
+{
+  "name": "@slopit/core",
+  "version": "0.1.0",
+  "description": "Core types, schemas, and validation for slopit behavioral analytics",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Aaron Steven White",
+    "email": "aaron.white@rochester.edu",
+    "url": "https://aaronstevenwhite.io"
+  },
+  "homepage": "https://slopit.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slopit/slopit.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/slopit/slopit/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "ai-detection",
+    "behavioral-analytics",
+    "crowdsourcing",
+    "research",
+    "schemas",
+    "validation"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./schemas": {
+      "import": "./dist/schemas/index.js",
+      "types": "./dist/schemas/index.d.ts"
+    },
+    "./validation": {
+      "import": "./dist/validation/index.js",
+      "types": "./dist/validation/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

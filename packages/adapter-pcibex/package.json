@@ -1,0 +1,59 @@
+{
+  "name": "@slopit/adapter-pcibex",
+  "version": "0.1.0",
+  "description": "PCIbex adapter for slopit behavioral capture",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Aaron Steven White",
+    "email": "aaron.white@rochester.edu",
+    "url": "https://aaronstevenwhite.io"
+  },
+  "homepage": "https://slopit.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slopit/slopit.git",
+    "directory": "packages/adapter-pcibex"
+  },
+  "bugs": {
+    "url": "https://github.com/slopit/slopit/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "pcibex",
+    "penncontroller",
+    "ibex",
+    "behavioral-research",
+    "experiment",
+    "psychology",
+    "ai-detection",
+    "crowdsourcing"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@slopit/adapter-shared": "workspace:*",
+    "@slopit/behavioral": "workspace:*",
+    "@slopit/core": "workspace:*"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

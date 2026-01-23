@@ -1,0 +1,55 @@
+{
+  "name": "@slopit/adapter-shared",
+  "version": "0.1.0",
+  "description": "Shared utilities for slopit platform adapters",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Aaron Steven White",
+    "email": "aaron.white@rochester.edu",
+    "url": "https://aaronstevenwhite.io"
+  },
+  "homepage": "https://slopit.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slopit/slopit.git",
+    "directory": "packages/adapter-shared"
+  },
+  "bugs": {
+    "url": "https://github.com/slopit/slopit/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "slopit",
+    "behavioral-research",
+    "adapter",
+    "ai-detection",
+    "crowdsourcing"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@slopit/core": "workspace:*",
+    "@slopit/behavioral": "workspace:*"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

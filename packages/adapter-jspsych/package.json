@@ -1,0 +1,64 @@
+{
+  "name": "@slopit/adapter-jspsych",
+  "version": "0.1.0",
+  "description": "jsPsych integration adapter for slopit behavioral capture",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Aaron Steven White",
+    "email": "aaron.white@rochester.edu",
+    "url": "https://aaronstevenwhite.io"
+  },
+  "homepage": "https://slopit.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slopit/slopit.git",
+    "directory": "packages/adapter-jspsych"
+  },
+  "bugs": {
+    "url": "https://github.com/slopit/slopit/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "jspsych",
+    "behavioral-research",
+    "experiment",
+    "psychology",
+    "ai-detection",
+    "crowdsourcing"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "jspsych": "^8.0.0"
+  },
+  "dependencies": {
+    "@slopit/adapter-shared": "workspace:*",
+    "@slopit/behavioral": "workspace:*",
+    "@slopit/core": "workspace:*"
+  },
+  "devDependencies": {
+    "jspsych": "^8.2.2",
+    "@jspsych/plugin-survey-text": "^2.0.0",
+    "@jspsych/plugin-survey-html-form": "^2.1.0",
+    "@jspsych/plugin-html-keyboard-response": "^2.0.0",
+    "jsdom": "^25.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

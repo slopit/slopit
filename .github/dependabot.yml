@@ -1,0 +1,47 @@
+version: 2
+
+updates:
+  # TypeScript/npm dependencies
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    groups:
+      typescript-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "typescript"
+          - "@biomejs/*"
+          - "turbo"
+    commit-message:
+      prefix: "deps(npm):"
+
+  # Python dependencies
+  - package-ecosystem: pip
+    directory: /python
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    groups:
+      python-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "ruff"
+          - "pyright"
+    commit-message:
+      prefix: "deps(pip):"
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps(actions):"
