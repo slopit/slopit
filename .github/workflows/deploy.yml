@@ -22,16 +22,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: pnpm
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
 
       - name: Install uv
         uses: astral-sh/setup-uv@v4
@@ -41,18 +37,20 @@ jobs:
       - name: Setup Python
         run: uv python install 3.13
 
-      - name: Install Node dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Install Python dependencies
         run: |
           cd python
           uv sync --extra docs
 
+      - name: Install website dependencies
+        run: |
+          cd website
+          npm ci
+
       - name: Build Docusaurus site
         run: |
           cd website
-          pnpm build
+          npm run build
 
       - name: Build MkDocs site
         run: |
