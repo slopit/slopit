@@ -69,7 +69,7 @@ const config: Config = {
           label: "TypeScript",
         },
         {
-          href: "https://slopit.github.io/docs/python/",
+          href: "https://slopit.github.io/slopit/docs/python/",
           label: "Python",
           position: "left",
         },
@@ -122,7 +122,7 @@ const config: Config = {
           items: [
             {
               label: "Python Docs",
-              href: "https://slopit.github.io/docs/python/",
+              href: "https://slopit.github.io/slopit/docs/python/",
             },
             {
               label: "GitHub",
