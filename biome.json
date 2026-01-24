@@ -1,15 +1,14 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "$schema": "https://biomejs.dev/schemas/2.3.12/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "correctness": {
         "noUnusedVariables": "error",
-        "noUnusedImports": "error"
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "off"
       },
       "complexity": {
         "useLiteralKeys": "off"
@@ -29,15 +28,22 @@
     "indentWidth": 2,
     "lineWidth": 100
   },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
   "files": {
-    "ignore": [
-      "**/node_modules",
-      "**/dist",
-      "**/*.json",
-      "python",
-      "website/build",
-      "website/.docusaurus",
-      ".changeset"
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/dist",
+      "!**/*.json",
+      "!**/python",
+      "!**/website/build",
+      "!**/website/.docusaurus",
+      "!**/.changeset",
+      "!**/website/src/css"
     ]
   }
 }

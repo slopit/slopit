@@ -7,15 +7,15 @@
 import {
   type BehavioralData,
   type CaptureFlag,
+  captureEnvironment,
   type EnvironmentInfo,
+  generateSessionId,
   type PlatformInfo,
   type ResponseInfo,
   SCHEMA_VERSION,
   type SlopitSession,
   type SlopitTrial,
   type StimulusInfo,
-  captureEnvironment,
-  generateSessionId,
 } from "@slopit/core";
 
 import type { CompletedTrial, SessionMetadata } from "./types.js";

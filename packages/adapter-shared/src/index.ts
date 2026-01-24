@@ -6,11 +6,15 @@
 
 // Base recorder
 export { BaseRecorder } from "./base-recorder.js";
-
+export type { DiscoverElementOptions, DiscoverElementsOptions } from "./element-discovery.js";
 // Element discovery
 export { discoverElement, discoverElements } from "./element-discovery.js";
-export type { DiscoverElementOptions, DiscoverElementsOptions } from "./element-discovery.js";
-
+export type {
+  CompleteSessionOptions,
+  CreateSessionMetadataOptions,
+  EnvironmentInfo,
+  TrialConversionData,
+} from "./export-utils.js";
 // Export utilities
 export {
   captureEnvironment,
@@ -20,13 +24,27 @@ export {
   createSessionMetadata,
   createTextResponse,
 } from "./export-utils.js";
-export type {
-  CompleteSessionOptions,
-  CreateSessionMetadataOptions,
-  EnvironmentInfo,
-  TrialConversionData,
-} from "./export-utils.js";
+export type { SimulateKeystrokeOptions, SimulatePasteOptions } from "./test-utils.js";
 
+// Test utilities
+export {
+  createMockBehavioralData,
+  createMockInput,
+  createMockTextarea,
+  delay,
+  MockClipboardEvent,
+  MockDataTransfer,
+  simulateBlur,
+  simulateClick,
+  simulateCopy,
+  simulateFocus,
+  simulateFocusBlur,
+  simulateKeystroke,
+  simulateMouseMove,
+  simulatePaste,
+  simulateTyping,
+  waitFor,
+} from "./test-utils.js";
 // Types
 export type {
   AdapterConfig,
@@ -40,24 +58,3 @@ export type {
   TrialConfig,
   TrialState,
 } from "./types.js";
-
-// Test utilities
-export {
-  MockClipboardEvent,
-  MockDataTransfer,
-  createMockBehavioralData,
-  createMockInput,
-  createMockTextarea,
-  delay,
-  simulateBlur,
-  simulateClick,
-  simulateCopy,
-  simulateFocus,
-  simulateFocusBlur,
-  simulateKeystroke,
-  simulateMouseMove,
-  simulatePaste,
-  simulateTyping,
-  waitFor,
-} from "./test-utils.js";
-export type { SimulateKeystrokeOptions, SimulatePasteOptions } from "./test-utils.js";

@@ -1,6 +1,5 @@
-import { describe, expect, it } from "vitest";
-
 import type { BehavioralData, CaptureFlag } from "@slopit/core";
+import { describe, expect, it } from "vitest";
 
 import {
   completeSession,

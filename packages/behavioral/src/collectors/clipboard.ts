@@ -4,8 +4,8 @@
  * @module
  */
 
-import { hashText, simpleHash } from "@slopit/core";
 import type { ClipboardCopyEvent, PasteEvent } from "@slopit/core";
+import { hashText, simpleHash } from "@slopit/core";
 
 import type { ClipboardCaptureConfig } from "../types.js";
 

@@ -4,15 +4,14 @@
  * @module
  */
 
-export {
-  InputWrapper,
-  createInputWrapper,
-} from "./input-wrapper.js";
-
 export type {
-  InputWrapperConfig,
   EnhancedBehavioralData,
-  WrapperEvent,
+  InputWrapperConfig,
   InterventionManager as WrapperInterventionManager,
   InterventionResult as WrapperInterventionResult,
+  WrapperEvent,
+} from "./input-wrapper.js";
+export {
+  createInputWrapper,
+  InputWrapper,
 } from "./input-wrapper.js";

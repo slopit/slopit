@@ -4,7 +4,7 @@
  * @module
  */
 
-import { BaseRecorder, type TrialConfig, discoverElement } from "@slopit/adapter-shared";
+import { BaseRecorder, discoverElement, type TrialConfig } from "@slopit/adapter-shared";
 import type { PlatformInfo, ResponseInfo, SlopitSession, StimulusInfo } from "@slopit/core";
 
 import type { VanillaRecorderConfig, VanillaTrialConfig, VanillaTrialResult } from "./types.js";

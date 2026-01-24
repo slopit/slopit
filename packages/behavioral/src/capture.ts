@@ -51,8 +51,8 @@ export class BehavioralCapture {
   private mouseCollector: MouseCollector | null = null;
   private scrollCollector: ScrollCollector | null = null;
   private inputDurationCollector: InputDurationCollector | null = null;
-  private attachedElement: HTMLElement | null = null;
   private trialStartTime = 0;
+  private attachedElement: HTMLElement | null = null;
   private listeners: Map<
     keyof BehavioralCaptureEvents,
     Set<BehavioralCaptureEvents[keyof BehavioralCaptureEvents]>

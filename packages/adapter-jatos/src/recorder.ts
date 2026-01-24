@@ -7,9 +7,9 @@
 import {
   BaseRecorder,
   type CompletedTrial,
+  discoverElement,
   type RecorderConfig,
   type TrialConfig,
-  discoverElement,
 } from "@slopit/adapter-shared";
 import type { PlatformInfo, ResponseInfo, SlopitSession } from "@slopit/core";
 

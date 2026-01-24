@@ -1,20 +1,19 @@
 import type { SlopitSession } from "../schemas/index.js";
 import { SlopitSessionSchema } from "./zod-schemas.js";
 
+export type { ZodBehavioralData, ZodSlopitSession, ZodSlopitTrial } from "./zod-schemas.js";
 export {
+  AnalysisFlagSchema,
+  BehavioralDataSchema,
+  CaptureFlagSchema,
+  EnvironmentInfoSchema,
+  FocusEventSchema,
+  KeystrokeEventSchema,
+  PasteEventSchema,
+  PlatformInfoSchema,
   SlopitSessionSchema,
   SlopitTrialSchema,
-  BehavioralDataSchema,
-  KeystrokeEventSchema,
-  FocusEventSchema,
-  PasteEventSchema,
-  CaptureFlagSchema,
-  AnalysisFlagSchema,
-  PlatformInfoSchema,
-  EnvironmentInfoSchema,
 } from "./zod-schemas.js";
-
-export type { ZodSlopitSession, ZodSlopitTrial, ZodBehavioralData } from "./zod-schemas.js";
 
 /**
  * Validation result for a session.

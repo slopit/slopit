@@ -10,8 +10,8 @@
 import jsPsychHtmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import jsPsychSurveyHtmlForm from "@jspsych/plugin-survey-html-form";
 import jsPsychSurveyText from "@jspsych/plugin-survey-text";
-import { MockClipboardEvent, MockDataTransfer, delay } from "@slopit/adapter-shared";
-import { type JsPsych, initJsPsych } from "jspsych";
+import { delay, MockClipboardEvent, MockDataTransfer } from "@slopit/adapter-shared";
+import { initJsPsych, type JsPsych } from "jspsych";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { SlopitExtension, type SlopitExtensionParams } from "../extension.js";
 import type { SlopitData } from "../types.js";

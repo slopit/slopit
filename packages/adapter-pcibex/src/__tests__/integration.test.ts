@@ -13,12 +13,12 @@ import {
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
-  PCIbexRecorder,
   clearSlopitElements,
   createPCIbexRecorder,
   getAllSlopitData,
   getSlopit,
   newSlopit,
+  PCIbexRecorder,
 } from "../index.js";
 import type { PennElement } from "../types.js";
 

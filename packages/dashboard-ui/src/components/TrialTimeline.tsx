@@ -138,7 +138,9 @@ function BehavioralSummary({ behavioral }: { behavioral: SlopitTrial["behavioral
 
 function MetricsSummary({
   metrics,
-}: { metrics: NonNullable<SlopitTrial["behavioral"]>["metrics"] }) {
+}: {
+  metrics: NonNullable<SlopitTrial["behavioral"]>["metrics"];
+}) {
   if (!metrics) return null;
 
   const items: Array<{ label: string; value: string }> = [];

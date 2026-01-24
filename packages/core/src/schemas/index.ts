@@ -1,38 +1,37 @@
 // Session types
-export type {
-  SlopitSession,
-  SlopitTrial,
-  PlatformInfo,
-  EnvironmentInfo,
-  SessionTiming,
-  StimulusInfo,
-  ResponseInfo,
-  SpanAnnotation,
-  GlobalEvents,
-  SessionFocusEvent,
-  ErrorEvent,
-  CustomEvent,
-} from "./session.js";
 
 // Behavioral types
 export type {
   BehavioralData,
   BehavioralMetrics,
-  KeystrokeEvent,
-  KeystrokeMetrics,
+  ClipboardCopyEvent,
   FocusEvent,
   FocusMetrics,
-  PasteEvent,
-  TimingMetrics,
+  InputDurationEvent,
+  InputDurationMetrics,
+  KeystrokeEvent,
+  KeystrokeMetrics,
   ModifierState,
   MouseEvent,
   MouseMetrics,
+  PasteEvent,
   ScrollEvent,
   ScrollMetrics,
-  ClipboardCopyEvent,
-  InputDurationEvent,
-  InputDurationMetrics,
+  TimingMetrics,
 } from "./behavioral.js";
-
 // Flag types
-export type { CaptureFlag, AnalysisFlag, Severity } from "./flags.js";
+export type { AnalysisFlag, CaptureFlag, Severity } from "./flags.js";
+export type {
+  CustomEvent,
+  EnvironmentInfo,
+  ErrorEvent,
+  GlobalEvents,
+  PlatformInfo,
+  ResponseInfo,
+  SessionFocusEvent,
+  SessionTiming,
+  SlopitSession,
+  SlopitTrial,
+  SpanAnnotation,
+  StimulusInfo,
+} from "./session.js";

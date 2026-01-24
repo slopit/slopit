@@ -13,7 +13,7 @@
  */
 
 import { createElement } from "react";
-import { type Root, createRoot } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 import { Dashboard } from "./components/Dashboard.js";
 import type { DashboardConfig } from "./types/index.js";
 import "./styles/index.css";

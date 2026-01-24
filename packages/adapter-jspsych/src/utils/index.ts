@@ -1,1 +1,1 @@
-export { exportToSlopit, getSlopitDataFromTrial, type ExportOptions } from "./export.js";
+export { type ExportOptions, exportToSlopit, getSlopitDataFromTrial } from "./export.js";

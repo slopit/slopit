@@ -1,5 +1,5 @@
-import { hashText, simpleHash } from "@slopit/core";
 import type { PasteEvent } from "@slopit/core";
+import { hashText, simpleHash } from "@slopit/core";
 import type { PasteCaptureConfig } from "../types.js";
 
 /**

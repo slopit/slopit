@@ -1,71 +1,68 @@
 // Types from schemas
+
+// Constants
+export { DEFAULT_CONFIG, KNOWN_PLATFORMS, SCHEMA_VERSION, SEVERITY_LEVELS } from "./constants.js";
 export type {
-  // Session types
-  SlopitSession,
-  SlopitTrial,
-  PlatformInfo,
-  EnvironmentInfo,
-  SessionTiming,
-  StimulusInfo,
-  ResponseInfo,
-  SpanAnnotation,
-  GlobalEvents,
-  SessionFocusEvent,
-  ErrorEvent,
-  CustomEvent,
+  AnalysisFlag,
   // Behavioral types
   BehavioralData,
   BehavioralMetrics,
-  KeystrokeEvent,
-  KeystrokeMetrics,
+  // Flag types
+  CaptureFlag,
+  ClipboardCopyEvent,
+  CustomEvent,
+  EnvironmentInfo,
+  ErrorEvent,
   FocusEvent,
   FocusMetrics,
-  PasteEvent,
-  TimingMetrics,
+  GlobalEvents,
+  InputDurationEvent,
+  InputDurationMetrics,
+  KeystrokeEvent,
+  KeystrokeMetrics,
   ModifierState,
   MouseEvent,
   MouseMetrics,
+  PasteEvent,
+  PlatformInfo,
+  ResponseInfo,
   ScrollEvent,
   ScrollMetrics,
-  ClipboardCopyEvent,
-  InputDurationEvent,
-  InputDurationMetrics,
-  // Flag types
-  CaptureFlag,
-  AnalysisFlag,
+  SessionFocusEvent,
+  SessionTiming,
   Severity,
+  // Session types
+  SlopitSession,
+  SlopitTrial,
+  SpanAnnotation,
+  StimulusInfo,
+  TimingMetrics,
 } from "./schemas/index.js";
-
-// Validation
-export {
-  SlopitSessionSchema,
-  SlopitTrialSchema,
-  BehavioralDataSchema,
-  KeystrokeEventSchema,
-  FocusEventSchema,
-  PasteEventSchema,
-  CaptureFlagSchema,
-  AnalysisFlagSchema,
-  validateSession,
-  isValidSession,
-} from "./validation/index.js";
-
-export type { ValidationResult } from "./validation/index.js";
-
 // Utilities
 export {
+  captureEnvironment,
+  duration,
+  formatDuration,
+  fromTimestamp,
   generateSessionId,
   generateTrialId,
   hashText,
-  simpleHash,
-  now,
   highResTime,
-  duration,
-  formatDuration,
+  now,
+  simpleHash,
   toTimestamp,
-  fromTimestamp,
-  captureEnvironment,
 } from "./utils/index.js";
-
-// Constants
-export { SCHEMA_VERSION, DEFAULT_CONFIG, SEVERITY_LEVELS, KNOWN_PLATFORMS } from "./constants.js";
+export type { ValidationResult } from "./validation/index.js";
+// Validation
+export {
+  AnalysisFlagSchema,
+  BehavioralDataSchema,
+  CaptureFlagSchema,
+  FocusEventSchema,
+  isValidSession,
+  KeystrokeEventSchema,
+  PasteEventSchema,
+  SlopitSessionSchema,
+  SlopitTrialSchema,
+  validateSession,
+} from "./validation/index.js";

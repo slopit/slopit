@@ -8,9 +8,9 @@
  */
 
 import {
+  delay,
   MockClipboardEvent,
   MockDataTransfer,
-  delay,
   simulateKeystroke,
 } from "@slopit/adapter-shared";
 import * as lab from "lab.js";

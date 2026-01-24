@@ -41,20 +41,20 @@
 
 // Element-based API
 export {
-  newSlopit,
-  getSlopit,
   clearSlopitElements,
   getAllSlopitData,
+  getSlopit,
   getSlopitCount,
+  newSlopit,
 } from "./element.js";
 
 // Recorder-based API
-export { PCIbexRecorder, createPCIbexRecorder } from "./recorder.js";
+export { createPCIbexRecorder, PCIbexRecorder } from "./recorder.js";
 
 // Types
 export type {
-  PCIbexSlopitConfig,
-  SlopitElement,
-  PennElement,
   AdapterData,
+  PCIbexSlopitConfig,
+  PennElement,
+  SlopitElement,
 } from "./types.js";

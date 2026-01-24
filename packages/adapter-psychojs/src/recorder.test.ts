@@ -1,6 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-
 import { createMockTextarea, simulateKeystroke, simulatePaste } from "@slopit/adapter-shared";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SlopitRecorder } from "./recorder.js";
 import type { PsychoJSTrialConfig } from "./types.js";

@@ -10,11 +10,11 @@ import {
   createBehavioralCapture,
 } from "@slopit/behavioral";
 import {
+  generateTrialId,
   type PlatformInfo,
   type ResponseInfo,
   type SlopitSession,
   type SlopitTrial,
-  generateTrialId,
 } from "@slopit/core";
 
 import {

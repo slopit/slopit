@@ -8,8 +8,8 @@ import {
   type AdapterData,
   BaseRecorder,
   type CompletedTrial,
-  type TrialConfig,
   discoverElement,
+  type TrialConfig,
 } from "@slopit/adapter-shared";
 import type { PlatformInfo, ResponseInfo } from "@slopit/core";
 

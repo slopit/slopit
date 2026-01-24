@@ -1,6 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-
 import type { PlatformInfo } from "@slopit/core";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { BaseRecorder } from "./base-recorder.js";
 import type { RecorderConfig } from "./types.js";

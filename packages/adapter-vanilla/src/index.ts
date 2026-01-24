@@ -6,13 +6,7 @@
  * @module
  */
 
-export { SlopitRecorder, VanillaRecorder } from "./recorder.js";
-export type {
-  VanillaRecorderConfig,
-  VanillaTrialConfig,
-  VanillaTrialResult,
-} from "./types.js";
-
+export type { AdapterData } from "@slopit/adapter-shared";
 // Re-export commonly used types for convenience
 export type {
   BehavioralData,
@@ -21,5 +15,9 @@ export type {
   SlopitTrial,
   StimulusInfo,
 } from "@slopit/core";
-
-export type { AdapterData } from "@slopit/adapter-shared";
+export { SlopitRecorder, VanillaRecorder } from "./recorder.js";
+export type {
+  VanillaRecorderConfig,
+  VanillaTrialConfig,
+  VanillaTrialResult,
+} from "./types.js";
