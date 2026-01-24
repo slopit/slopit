@@ -12,10 +12,10 @@ const config: Config = {
   },
 
   url: "https://slopit.github.io",
-  baseUrl: "/",
+  baseUrl: "/slopit/",
 
   organizationName: "slopit",
-  projectName: "slopit.github.io",
+  projectName: "slopit",
 
   onBrokenLinks: "throw",
 
