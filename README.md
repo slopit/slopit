@@ -24,8 +24,8 @@ slopit provides tools to capture and analyze behavioral signals during text entr
 
 ## Documentation
 
-- **[TypeScript Documentation](https://slopit.github.io/docs/typescript/intro)** - Behavioral capture packages
-- **[Python Documentation](https://slopit.github.io/docs/python/)** - Analysis toolkit
+- **[TypeScript Documentation](https://slopit.github.io/slopit/docs/typescript/intro):** Behavioral capture packages
+- **[Python Documentation](https://slopit.github.io/slopit/docs/python/):** Analysis toolkit
 
 ## Quick Start
 
@@ -123,6 +123,6 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines.
 
 [MIT](./LICENSE)
 
-## Author
+## Acknowledgments
 
-[Aaron Steven White](https://aaronstevenwhite.io) (aaron.white@rochester.edu)
+This project was architected and implemented with the help of Claude Code.
