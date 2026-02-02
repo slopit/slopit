@@ -52,13 +52,13 @@
     "@slopit/core": "workspace:*"
   },
   "devDependencies": {
-    "jspsych": "^8.2.2",
+    "jspsych": "^8.2.3",
     "@jspsych/plugin-survey-text": "^2.0.0",
     "@jspsych/plugin-survey-html-form": "^2.1.0",
     "@jspsych/plugin-html-keyboard-response": "^2.0.0",
-    "jsdom": "^25.0.1",
+    "jsdom": "^28.0.0",
     "tsup": "^8.3.5",
     "typescript": "^5.9.3",
-    "vitest": "^2.1.8"
+    "vitest": "^4.0.18"
   }
 }
