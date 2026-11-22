@@ -1,6 +1,6 @@
 {
   "name": "@slopit/adapter-labjs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "lab.js integration adapter for slopit behavioral capture",
   "type": "module",
   "license": "MIT",
@@ -36,7 +36,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",

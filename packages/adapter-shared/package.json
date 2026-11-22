@@ -1,6 +1,6 @@
 {
   "name": "@slopit/adapter-shared",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared utilities for slopit platform adapters",
   "type": "module",
   "license": "MIT",
@@ -34,7 +34,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "vitest run",

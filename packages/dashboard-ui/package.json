@@ -1,6 +1,6 @@
 {
   "name": "@slopit/dashboard-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React dashboard UI for slopit behavioral analytics",
   "type": "module",
   "license": "MIT",

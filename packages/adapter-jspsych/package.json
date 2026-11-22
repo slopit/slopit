@@ -1,6 +1,6 @@
 {
   "name": "@slopit/adapter-jspsych",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "jsPsych integration adapter for slopit behavioral capture",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup && tsup --config tsup.browser.config.ts",
     "typecheck": "tsc --noEmit",
