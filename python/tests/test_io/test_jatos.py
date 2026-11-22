@@ -159,9 +159,7 @@ class TestJATOSLoader:
     def test_load_many_from_directory(self, temp_dir: Path) -> None:
         """Should load multiple JATOS files from directory."""
         for i in range(3):
-            trials = [
-                {"trial_type": "survey", "time_elapsed": 1000, "rt": 500, "trial_index": 0}
-            ]
+            trials = [{"trial_type": "survey", "time_elapsed": 1000, "rt": 500, "trial_index": 0}]
             file_path = temp_dir / f"study_result_{i}.txt"
             with file_path.open("w") as f:
                 json.dump(trials, f)
@@ -357,3 +355,44 @@ class TestJATOSIntegration:
         participant_ids = {s.participant_id for s in sessions}
         assert "participant-0" in participant_ids
         assert "participant-1" in participant_ids
+
+
+def test_loads_incomplete_stream_with_raw_records_and_redacted_events() -> None:
+    """Keep arrival order while producing one trial per logical sequence."""
+    loader = JATOSLoader()
+    records = [
+        {"record_type": "session", "seq": 0, "wall_ms": 1234, "prolific_pid": "p1"},
+        {
+            "record_type": "trial",
+            "seq": 3,
+            "responses": {"preposition": "in"},
+            "slopit": {
+                "behavioral": {
+                    "responseControls": {
+                        "schemaVersion": "1.0",
+                        "events": [
+                            {"time": 12, "event": "paste", "control": "text", "trusted": True}
+                        ],
+                    }
+                }
+            },
+        },
+        {"record_type": "plan", "seq": 1},
+        {"record_type": "trial", "seq": 3, "responses": {"preposition": "in"}},
+    ]
+    session = loader.load_result(records, result_id="participation")
+    assert session.session_id == "participation"
+    assert session.participant_id == "p1"
+    assert session.timing.end_time is None
+    assert len(session.trials) == 1
+    trial = session.trials[0]
+    assert trial.response is not None
+    assert trial.response.value == {"preposition": "in"}
+    assert trial.behavioral is not None
+    assert trial.behavioral.response_controls is not None
+    assert trial.behavioral.response_controls.events[0].event == "paste"
+    assert session.metadata == {
+        "jatos_records": records,
+        "jatos_missing_seq_ranges": [[2, 2]],
+        "jatos_terminal_record_seen": False,
+    }

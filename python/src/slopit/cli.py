@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING
 import click
 from rich.console import Console
 
-from slopit import load_sessions
+from slopit import __version__, load_sessions
 from slopit.behavioral import (
     Analyzer,
     FocusAnalyzer,
@@ -36,7 +36,7 @@ console = Console()
 
 
 @click.group()
-@click.version_option(version="0.1.0", prog_name="slopit")
+@click.version_option(version=__version__, prog_name="slopit")
 def main() -> None:
     """slopit: AI response detection for crowdsourced research."""
     pass
@@ -233,8 +233,7 @@ def dashboard(host: str, port: int, reload: bool, data_dir: str) -> None:
         from slopit.dashboard.config import DashboardConfig
     except ImportError as e:
         click.echo(
-            "Dashboard dependencies not installed. "
-            "Install with: pip install slopit[dashboard]",
+            "Dashboard dependencies not installed. Install with: pip install slopit[dashboard]",
             err=True,
         )
         raise SystemExit(1) from e

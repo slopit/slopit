@@ -196,7 +196,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Install package with dev dependencies
-        run: uv pip install --system -e ".[dev]"
+        run: uv pip install --system -e ".[dev,dashboard]"
 
       - name: Run Pyright
         run: pyright
@@ -222,7 +222,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Install package with dev dependencies
-        run: uv pip install --system -e ".[dev]"
+        run: uv pip install --system -e ".[dev,dashboard]"
 
       - name: Run pytest
         run: pytest

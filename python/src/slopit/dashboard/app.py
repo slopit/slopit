@@ -12,6 +12,7 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from slopit import __version__
 from slopit.dashboard.api import analysis, export, sessions, trials
 from slopit.dashboard.config import DashboardConfig
 from slopit.dashboard.websocket.handlers import handle_message
@@ -45,7 +46,7 @@ def create_app(config: DashboardConfig | None = None) -> FastAPI:
     app = FastAPI(
         title="Slopit Dashboard",
         description="Analytics dashboard for AI response detection",
-        version="0.1.0",
+        version=__version__,
     )
 
     # CORS middleware

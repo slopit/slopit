@@ -168,9 +168,7 @@ class JATOSClient:
             If the API request fails or result not found.
         """
         client = await self._get_client()
-        response = await client.get(
-            f"/jatos/api/v1/results/{study_id}/{result_id}"
-        )
+        response = await client.get(f"/jatos/api/v1/results/{study_id}/{result_id}")
         response.raise_for_status()
         return cast("dict[str, JsonValue]", response.json())
 

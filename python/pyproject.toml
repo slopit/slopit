@@ -1,6 +1,6 @@
 [project]
 name = "slopit"
-version = "0.1.0"
+version = "0.2.0"
 description = "AI response detection toolkit for crowdsourced behavioral research"
 readme = "README.md"
 license = "MIT"

@@ -7,7 +7,7 @@ input duration events, and computed behavioral metrics.
 
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field
 
 
 class ModifierState(BaseModel):
@@ -426,6 +426,60 @@ class BehavioralMetrics(BaseModel):
     input_duration: InputDurationMetrics | None = None
 
 
+class ResponseControlEvent(BaseModel):
+    """A redacted event inside an explicitly selected response control."""
+
+    model_config = ConfigDict(extra="forbid")
+    time: float = Field(ge=0)
+    event: Literal[
+        "keydown",
+        "keyup",
+        "focusin",
+        "focusout",
+        "input",
+        "change",
+        "click",
+        "submit",
+        "paste",
+        "copy",
+        "cut",
+        "pointerdown",
+        "pointerup",
+        "pointermove",
+    ]
+    control: Literal["select", "button", "text", "radio", "checkbox", "range"]
+    trusted: bool
+    key: (
+        Literal[
+            "ArrowDown",
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "Backspace",
+            "Delete",
+            "End",
+            "Enter",
+            "Escape",
+            "Home",
+            "PageDown",
+            "PageUp",
+            "Tab",
+            "redacted",
+        ]
+        | None
+    ) = None
+    x: float | None = Field(default=None, ge=0)
+    y: float | None = Field(default=None, ge=0)
+
+
+class ResponseControlsData(BaseModel):
+    """Versioned response-control events, with no captured answers."""
+
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+    schema_version: Literal["1.0"] = Field(alias="schemaVersion")
+    events: list[ResponseControlEvent]
+
+
 class BehavioralData(BaseModel):
     """Container for all behavioral capture data.
 
@@ -449,6 +503,11 @@ class BehavioralData(BaseModel):
         Computed metrics from the behavioral data.
     """
 
+    response_controls: ResponseControlsData | None = Field(
+        default=None,
+        validation_alias=AliasChoices("responseControls", "response_controls"),
+        serialization_alias="responseControls",
+    )
     keystrokes: list[KeystrokeEvent] | None = None
     focus: list[FocusEvent] | None = None
     paste: list[PasteEvent] | None = None
