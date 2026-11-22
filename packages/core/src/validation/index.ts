@@ -11,6 +11,8 @@ export {
   KeystrokeEventSchema,
   PasteEventSchema,
   PlatformInfoSchema,
+  ResponseControlEventSchema,
+  ResponseControlsDataSchema,
   SlopitSessionSchema,
   SlopitTrialSchema,
 } from "./zod-schemas.js";

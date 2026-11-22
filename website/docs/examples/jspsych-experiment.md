@@ -519,3 +519,5 @@ http://localhost:5173?participant_id=test123&STUDY_ID=dev
 ```
 
 The experiment will use these as fallback identifiers.
+
+For button, select, or slider experiments, use the [consent-gated response-control profile](../guides/jspsych-integration.md#collect-response-control-events-after-consent).

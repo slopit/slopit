@@ -8,7 +8,9 @@ import { discoverElement } from "@slopit/adapter-shared";
 import {
   type BehavioralCapture,
   type BehavioralCaptureConfig,
+  captureResponseControls,
   createBehavioralCapture,
+  type ResponseControlsConfig,
 } from "@slopit/behavioral";
 import {
   type JsPsych,
@@ -31,6 +33,9 @@ export interface SlopitExtensionParams extends BehavioralCaptureConfig {
    * @default "textarea, input[type='text']"
    */
   targetSelector?: string;
+
+  /** Use the consent-gated response-control profile in place of text capture. */
+  responseControls?: ResponseControlsConfig;
 }
 
 /**
@@ -79,9 +84,8 @@ class SlopitExtension implements JsPsychExtension {
 
   private jsPsych: JsPsych;
   private capture: BehavioralCapture | null = null;
-  private params: SlopitExtensionParams | null = null;
+  private responseCapture: ReturnType<typeof captureResponseControls> = null;
   private startTime = 0;
-  private attachedElement: HTMLElement | null = null;
   private observerCleanup: (() => void) | null = null;
 
   /**
@@ -108,8 +112,7 @@ class SlopitExtension implements JsPsychExtension {
    *
    * @param params - Extension parameters for this trial
    */
-  on_start(params: SlopitExtensionParams): void {
-    this.params = params;
+  on_start(_params: SlopitExtensionParams): void {
     this.startTime = performance.now();
   }
 
@@ -122,6 +125,14 @@ class SlopitExtension implements JsPsychExtension {
    */
   on_load(params: SlopitExtensionParams): void {
     const displayElement = this.jsPsych.getDisplayElement();
+    if (params.responseControls !== undefined) {
+      this.responseCapture = captureResponseControls(
+        displayElement,
+        params.responseControls,
+        this.startTime,
+      );
+      return;
+    }
     const selector = params.targetSelector ?? "textarea, input[type='text']";
 
     const cleanup = discoverElement({
@@ -149,6 +160,13 @@ class SlopitExtension implements JsPsychExtension {
       this.observerCleanup = null;
     }
 
+    if (this.responseCapture !== null) {
+      const responseControls = this.responseCapture.finish();
+      this.responseCapture = null;
+      return responseControls === null
+        ? {}
+        : { slopit: { behavioral: { responseControls }, flags: [] } };
+    }
     if (this.capture === null) {
       return {};
     }
@@ -158,8 +176,6 @@ class SlopitExtension implements JsPsychExtension {
 
     this.capture.detach();
     this.capture = null;
-    this.attachedElement = null;
-    this.params = null;
 
     return {
       slopit: {
@@ -207,7 +223,6 @@ class SlopitExtension implements JsPsychExtension {
 
     this.capture = createBehavioralCapture(config);
     this.capture.attach(element, this.startTime);
-    this.attachedElement = element;
   }
 }
 

@@ -603,3 +603,53 @@ const jsPsych = initJsPsych({
   },
 }
 ```
+
+## Collect response-control events after consent
+
+Use the response-control profile for studies with button, radio, select,
+range, or explicitly selected text inputs. The study controls consent and
+selects the exact controls. Turn capture on only after an affirmative
+response to your consent trial and abort the signal on withdrawal.
+
+```js
+const captureLifetime = new AbortController();
+let consented = false;
+
+const responseTrial = {
+  type: YourResponsePlugin,
+  extensions: [{
+    type: SlopitExtension,
+    params: {
+      responseControls: {
+        targetSelector: "select.answer, input.answer, button.submit-answer",
+        hasConsent: () => consented,
+        signal: captureLifetime.signal,
+      },
+    },
+  }],
+};
+
+// Call from the study's consent handler after an affirmative response.
+function acceptConsent() {
+  consented = true;
+}
+
+// Call from the study's withdrawal handler.
+function withdraw() {
+  consented = false;
+  captureLifetime.abort();
+}
+```
+
+The profile records timing, browser event provenance, navigation-key
+categories, and pointer coordinates within the selected control. It records
+clipboard event occurrences without reading the clipboard. Field values,
+printable key values, and physical key codes are omitted. Answers may still
+appear in the data returned by your jsPsych response plugin. Legacy text
+capture still uses its own configuration. The redacted profile is recorded
+as `slopit.behavioral.responseControls` with schema version `1.0`.
+
+For an appended JATOS JSONL session, the Python `JATOSLoader` exposes
+completed trials in sequence order and retains the original ordered records
+in `session.metadata["jatos_records"]`, including duplicate deliveries,
+gaps, and partial sessions.

@@ -239,10 +239,62 @@ export interface BehavioralMetrics {
   inputDuration?: InputDurationMetrics;
 }
 
+/** An HTML response control explicitly selected by the study. */
+export type ResponseControl = "select" | "button" | "text" | "radio" | "checkbox" | "range";
+
+/** Timing and provenance captured without the control value or clipboard content. */
+export interface ResponseControlEvent {
+  time: number;
+  event:
+    | "keydown"
+    | "keyup"
+    | "focusin"
+    | "focusout"
+    | "input"
+    | "change"
+    | "click"
+    | "submit"
+    | "paste"
+    | "copy"
+    | "cut"
+    | "pointerdown"
+    | "pointerup"
+    | "pointermove";
+  control: ResponseControl;
+  trusted: boolean;
+  key?:
+    | "ArrowDown"
+    | "ArrowLeft"
+    | "ArrowRight"
+    | "ArrowUp"
+    | "Backspace"
+    | "Delete"
+    | "End"
+    | "Enter"
+    | "Escape"
+    | "Home"
+    | "PageDown"
+    | "PageUp"
+    | "Tab"
+    | "redacted";
+  /** Pointer coordinate in pixels relative to the selected control. */
+  x?: number;
+  y?: number;
+}
+
+/** Versioned response-control stream. */
+export interface ResponseControlsData {
+  schemaVersion: "1.0";
+  events: ResponseControlEvent[];
+}
+
 /**
  * Container for all behavioral capture data.
  */
 export interface BehavioralData {
+  /** Response-control telemetry when the study opts in with consent. */
+  responseControls?: ResponseControlsData;
+
   /**
    * Keystroke events.
    */

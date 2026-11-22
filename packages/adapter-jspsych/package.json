@@ -29,7 +29,9 @@
     "ai-detection",
     "crowdsourcing"
   ],
+  "unpkg": "./dist/browser.global.js",
   "exports": {
+    "./browser": "./dist/browser.global.js",
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
@@ -37,7 +39,7 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && tsup --config tsup.browser.config.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -4,6 +4,10 @@ export { FocusCollector } from "./collectors/focus.js";
 // Individual collectors for advanced use
 export { KeystrokeCollector } from "./collectors/keystroke.js";
 export { PasteCollector } from "./collectors/paste.js";
+export {
+  captureResponseControls,
+  type ResponseControlsConfig,
+} from "./collectors/response-controls.js";
 // Detection modules
 export type {
   DetectionIndicator,

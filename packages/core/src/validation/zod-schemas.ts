@@ -70,7 +70,59 @@ export const BehavioralMetricsSchema = z.object({
   timing: TimingMetricsSchema.optional(),
 });
 
+export const ResponseControlEventSchema = z
+  .object({
+    time: z.number().nonnegative(),
+    event: z.enum([
+      "keydown",
+      "keyup",
+      "focusin",
+      "focusout",
+      "input",
+      "change",
+      "click",
+      "submit",
+      "paste",
+      "copy",
+      "cut",
+      "pointerdown",
+      "pointerup",
+      "pointermove",
+    ]),
+    control: z.enum(["select", "button", "text", "radio", "checkbox", "range"]),
+    trusted: z.boolean(),
+    key: z
+      .enum([
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowUp",
+        "Backspace",
+        "Delete",
+        "End",
+        "Enter",
+        "Escape",
+        "Home",
+        "PageDown",
+        "PageUp",
+        "Tab",
+        "redacted",
+      ])
+      .optional(),
+    x: z.number().nonnegative().optional(),
+    y: z.number().nonnegative().optional(),
+  })
+  .strict();
+
+export const ResponseControlsDataSchema = z
+  .object({
+    schemaVersion: z.literal("1.0"),
+    events: z.array(ResponseControlEventSchema),
+  })
+  .strict();
+
 export const BehavioralDataSchema = z.object({
+  responseControls: ResponseControlsDataSchema.optional(),
   keystrokes: z.array(KeystrokeEventSchema).optional(),
   focus: z.array(FocusEventSchema).optional(),
   paste: z.array(PasteEventSchema).optional(),

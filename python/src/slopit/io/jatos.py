@@ -176,13 +176,15 @@ class JATOSLoader(BaseLoader):
         if path.is_dir():
             return any(path.glob("study_result_*.txt")) or any(path.glob("*.txt"))
 
-        if path.suffix not in {".txt", ".json"}:
+        if path.suffix not in {".txt", ".json", ".jsonl"}:
             return False
 
         # Check for JATOS markers in content
         try:
             content = path.read_text(encoding="utf-8")[:1000]
-            return "trial_type" in content or "jsPsych" in content.lower()
+            return any(
+                marker in content.lower() for marker in ("trial_type", "jspsych", "record_type")
+            )
         except Exception:
             return False
 
@@ -254,7 +256,7 @@ class JATOSLoader(BaseLoader):
     def _convert_to_session(
         self,
         trials: list[dict[str, JsonValue]],
-        file_id: str,  # noqa: ARG002
+        file_id: str,
     ) -> SlopitSession:
         """Convert raw JATOS trial data to SlopitSession.
 
@@ -263,13 +265,19 @@ class JATOSLoader(BaseLoader):
         trials
             List of raw trial dictionaries.
         file_id
-            Identifier derived from filename (reserved for future use).
+            Identifier derived from the filename or the JATOS API result.
 
         Returns
         -------
         SlopitSession
             Converted session.
         """
+        if any(
+            trial.get("record_type") in ("session", "plan", "trial", "event", "end")
+            for trial in trials
+        ):
+            return self._convert_stream(trials, file_id)
+
         # Extract metadata from first trial or use defaults
         first_trial = trials[0] if trials else {}
         last_trial = trials[-1] if trials else {}
@@ -303,6 +311,49 @@ class JATOSLoader(BaseLoader):
             global_events=GlobalEvents(),
         )
 
+    def _convert_stream(self, records: list[dict[str, JsonValue]], file_id: str) -> SlopitSession:
+        """Convert durable trials and retain the raw stream, including any retries."""
+        sequenced: dict[int, dict[str, JsonValue]] = {}
+        for record in records:
+            seq = record.get("seq")
+            if type(seq) is int and seq >= 0:
+                sequenced.setdefault(seq, record)
+        ordered = sorted(sequenced.items())
+        session = next((r for _, r in ordered if r.get("record_type") == "session"), {})
+        end_record = next((r for _, r in reversed(ordered) if r.get("record_type") == "end"), {})
+        trials = [
+            self._convert_trial(record, index)
+            for index, record in enumerate(r for _, r in ordered if r.get("record_type") == "trial")
+        ]
+        start = _get_int(session, "session_start_wall_ms", _get_int(session, "wall_ms"))
+        end = _get_int(end_record, "wall_ms") if end_record else None
+        gaps: list[JsonValue] = []
+        previous = -1
+        for seq, _ in ordered:
+            if seq > previous + 1:
+                gaps.append([previous + 1, seq - 1])
+            previous = seq
+        return SlopitSession(
+            schema_version="1.0",
+            session_id=_get_str(session, "session_id", file_id),
+            participant_id=self._extract_participant_id(session),
+            study_id=self._extract_study_id(session),
+            platform=PlatformInfo(name="jspsych", version=self._detect_jspsych_version(session)),
+            environment=self._extract_environment(session),
+            timing=SessionTiming(
+                start_time=start,
+                end_time=end,
+                duration=end - start if end is not None and end >= start else None,
+            ),
+            trials=trials,
+            global_events=GlobalEvents(),
+            metadata={
+                "jatos_records": list(records),
+                "jatos_missing_seq_ranges": gaps,
+                "jatos_terminal_record_seen": bool(end_record),
+            },
+        )
+
     def _convert_trial(self, trial: dict[str, JsonValue], index: int) -> SlopitTrial:
         """Convert a single JATOS trial to SlopitTrial.
 
@@ -331,14 +382,14 @@ class JATOSLoader(BaseLoader):
             trial_id=trial_id,
             trial_index=index,
             trial_type=trial_type,
-            start_time=time_elapsed - rt,
-            end_time=time_elapsed,
+            start_time=_get_int(trial, "start_perf_ms", time_elapsed - rt),
+            end_time=_get_int(trial, "offset_perf_ms", time_elapsed),
             rt=rt,
         )
 
         # Extract response
-        if "response" in trial:
-            response = trial["response"]
+        if "responses" in trial or "response" in trial:
+            response = trial.get("responses", trial.get("response"))
             converted.response = ResponseInfo(
                 type="text" if isinstance(response, str) else "other",
                 value=response,
@@ -364,7 +415,7 @@ class JATOSLoader(BaseLoader):
 
     def _extract_participant_id(self, trial: dict[str, JsonValue]) -> str | None:
         """Extract participant ID from trial data."""
-        for key in ["PROLIFIC_PID", "workerId", "participant_id", "subject"]:
+        for key in ["PROLIFIC_PID", "prolific_pid", "workerId", "participant_id", "subject"]:
             if key in trial:
                 value = trial[key]
                 if value is not None:
@@ -373,7 +424,7 @@ class JATOSLoader(BaseLoader):
 
     def _extract_study_id(self, trial: dict[str, JsonValue]) -> str | None:
         """Extract study ID from trial data."""
-        for key in ["STUDY_ID", "study_id", "experiment_id"]:
+        for key in ["STUDY_ID", "study_id", "experiment_id", "experiment"]:
             if key in trial:
                 value = trial[key]
                 if value is not None:

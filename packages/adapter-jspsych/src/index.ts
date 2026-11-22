@@ -7,9 +7,10 @@
  * @module
  */
 
+// Types
+export type { ResponseControlsConfig } from "@slopit/behavioral";
 // Extension (primary API)
 export { SlopitExtension, type SlopitExtensionParams } from "./extension.js";
-// Types
 export type { SlopitConfig, SlopitData } from "./types.js";
 // Export utilities
 export { type ExportOptions, exportToSlopit, getSlopitDataFromTrial } from "./utils/index.js";
