@@ -18,7 +18,7 @@ Example
 from slopit.io import load_session, load_sessions
 from slopit.schemas import SlopitSession, SlopitTrial
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "SlopitSession",

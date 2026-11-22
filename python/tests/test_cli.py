@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 from click.testing import CliRunner
 
+from slopit import __version__
 from slopit.cli import main
 from slopit.schemas import SlopitSession
 
@@ -60,7 +61,7 @@ class TestCLIMain:
         result = cli_runner.invoke(main, ["--version"])
 
         assert result.exit_code == 0
-        assert "0.1.0" in result.output
+        assert result.output == f"slopit, version {__version__}\n"
 
     def test_help(self, cli_runner: CliRunner) -> None:
         """Should display help."""
