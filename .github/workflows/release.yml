@@ -31,6 +31,9 @@ jobs:
           cache: pnpm
           registry-url: "https://registry.npmjs.org"
 
+      - name: Install npm for trusted publishing
+        run: npm install --global npm@11.12.1
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -41,8 +44,8 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm version
-          publish: pnpm release
+          version: pnpm run version
+          publish: pnpm run release
           title: "chore: version packages"
           commit: "chore: version packages"
         env:
