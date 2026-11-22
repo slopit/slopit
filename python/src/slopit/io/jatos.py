@@ -319,8 +319,9 @@ class JATOSLoader(BaseLoader):
             if type(seq) is int and seq >= 0:
                 sequenced.setdefault(seq, record)
         ordered = sorted(sequenced.items())
-        session = next((r for _, r in ordered if r.get("record_type") == "session"), {})
-        end_record = next((r for _, r in reversed(ordered) if r.get("record_type") == "end"), {})
+        empty: dict[str, JsonValue] = {}
+        session = next((r for _, r in ordered if r.get("record_type") == "session"), empty)
+        end_record = next((r for _, r in reversed(ordered) if r.get("record_type") == "end"), empty)
         trials = [
             self._convert_trial(record, index)
             for index, record in enumerate(r for _, r in ordered if r.get("record_type") == "trial")

@@ -7,7 +7,7 @@ submissions.
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import Enum, StrEnum
 from typing import TYPE_CHECKING, cast
 
 import httpx
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from slopit.schemas.types import JsonValue
 
 
-class ParticipantAction(str, Enum):
+class ParticipantAction(StrEnum):
     """Actions that can be taken on Prolific participant submissions.
 
     Attributes
@@ -29,12 +29,18 @@ class ParticipantAction(str, Enum):
         Return the submission to the pool without penalty.
     """
 
+    # Preserve the existing string and format representation of enum members.
+    __str__ = Enum.__str__
+
+    def __format__(self, format_spec: str, /) -> str:
+        return format(str(self), format_spec)
+
     APPROVE = "APPROVE"
     REJECT = "REJECT"
     RETURN = "RETURN"
 
 
-class SubmissionStatus(str, Enum):
+class SubmissionStatus(StrEnum):
     """Possible statuses for a Prolific submission.
 
     Attributes
@@ -52,6 +58,12 @@ class SubmissionStatus(str, Enum):
     TIMED_OUT
         Participant did not complete within the time limit.
     """
+
+    # Preserve the existing string and format representation of enum members.
+    __str__ = Enum.__str__
+
+    def __format__(self, format_spec: str, /) -> str:
+        return format(str(self), format_spec)
 
     ACTIVE = "ACTIVE"
     AWAITING_REVIEW = "AWAITING REVIEW"

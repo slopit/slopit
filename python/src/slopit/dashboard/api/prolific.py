@@ -320,9 +320,7 @@ async def get_study_submissions(
                 with contextlib.suppress(ValueError):
                     status_enum = SubmissionStatus(status)
 
-            raw_submissions = await client.get_submissions(
-                study_id, status=status_enum
-            )
+            raw_submissions = await client.get_submissions(study_id, status=status_enum)
         except Exception as e:
             error_msg = str(e)
             if "401" in error_msg or "403" in error_msg:
@@ -353,9 +351,7 @@ async def get_study_submissions(
                         participant_id=str(participant_id),
                         status=_get_str(raw, "status", "UNKNOWN"),
                         started_at=str(started_at) if started_at is not None else None,
-                        completed_at=(
-                            str(completed_at) if completed_at is not None else None
-                        ),
+                        completed_at=(str(completed_at) if completed_at is not None else None),
                     )
                 )
 
@@ -389,10 +385,7 @@ async def transition_submission(request: TransitionRequest) -> TransitionRespons
         404 if submission not found.
         502 if Prolific API is unreachable.
     """
-    if (
-        request.action == ParticipantAction.REJECT
-        and request.rejection_category is None
-    ):
+    if request.action == ParticipantAction.REJECT and request.rejection_category is None:
         raise HTTPException(
             status_code=400,
             detail="rejection_category is required when rejecting",
@@ -464,10 +457,7 @@ async def batch_transition_submissions(
             detail="submission_ids cannot be empty",
         )
 
-    if (
-        request.action == ParticipantAction.REJECT
-        and request.rejection_category is None
-    ):
+    if request.action == ParticipantAction.REJECT and request.rejection_category is None:
         raise HTTPException(
             status_code=400,
             detail="rejection_category is required when rejecting",

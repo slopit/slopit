@@ -233,8 +233,7 @@ def dashboard(host: str, port: int, reload: bool, data_dir: str) -> None:
         from slopit.dashboard.config import DashboardConfig
     except ImportError as e:
         click.echo(
-            "Dashboard dependencies not installed. "
-            "Install with: pip install slopit[dashboard]",
+            "Dashboard dependencies not installed. Install with: pip install slopit[dashboard]",
             err=True,
         )
         raise SystemExit(1) from e
