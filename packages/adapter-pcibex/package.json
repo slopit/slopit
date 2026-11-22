@@ -1,6 +1,6 @@
 {
   "name": "@slopit/adapter-pcibex",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PCIbex adapter for slopit behavioral capture",
   "type": "module",
   "license": "MIT",
@@ -37,7 +37,9 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",

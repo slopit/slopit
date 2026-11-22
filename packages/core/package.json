@@ -1,6 +1,6 @@
 {
   "name": "@slopit/core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Core types, schemas, and validation for slopit behavioral analytics",
   "type": "module",
   "license": "MIT",
@@ -43,7 +43,9 @@
       "types": "./dist/validation/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
